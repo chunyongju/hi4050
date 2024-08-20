@@ -13,6 +13,8 @@ export const InputTypes = {
   EMAIL: 'EMAIL',
   PASSWORD: 'PASSWORD',
   PASSWORD_CONFIRM: 'PASSWORD_CONFIRM',
+  TITLE: 'TITLE',
+  DESCRIPTION: 'DESCRIPTION',
 };
 
 const PasswordProps = {
@@ -38,6 +40,20 @@ const InputTypeProps = {
     title: 'PASSWORD CONFIRM',
     placeholder: 'PASSWORD CONFIRM',
     ...PasswordProps,
+  },
+  TITLE: {
+    title: 'TITLE',
+    placeholder: '대화방명',
+    keyboardType: 'default',
+    secureTextEntry: false,
+    iconName: { active: 'alpha-t-circle', inactive: 'alpha-t-circle-outline' },
+  },
+  DESCRIPTION: {
+    title: 'DESCRIPTION',
+    placeholder: '설명',
+    keyboardType: 'default',
+    secureTextEntry: false,
+    iconName: { active: 'alpha-d-circle', inactive: 'alpha-d-circle-outline' },
   },
 };
 

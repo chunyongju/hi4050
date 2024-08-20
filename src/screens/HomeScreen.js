@@ -20,26 +20,26 @@ const HomeScreen = () => {
     <View style={[styles.container, { paddingTop: top }]}>
       <View style={styles.topContainer}>
         <Image source={require('../../assets/icon.png')} style={styles.icon} />
-        <Text style={styles.title}>PlacePhotos</Text>
+        <Text style={styles.title}>Hi 4050</Text>
       </View>
 
       <View style={styles.buttonContainer}>
         <Pressable onPress={() => navigation.navigate(ContentRoutes.LIST)}>
           <Image
-            source={require('../../assets/home-clock.png')}
+            source={require('../../assets/home-map.png')}
             style={[styles.image, { height }]}
           />
-          <Text style={styles.buttonTitle}>타임라인</Text>
+          <Text style={styles.buttonTitle}>여행사진공유</Text>
         </Pressable>
       </View>
 
       <View style={styles.buttonContainer}>
-        <Pressable onPress={() => navigation.navigate(ContentRoutes.MAP)}>
+        <Pressable onPress={() => navigation.navigate(ContentRoutes.CHAT)}>
           <Image
-            source={require('../../assets/home-map.png')}
+            source={require('../../assets/home-clock.png')}
             style={[styles.image, { height }]}
           />
-          <Text style={styles.buttonTitle}>지도</Text>
+          <Text style={styles.buttonTitle}>대화</Text>
         </Pressable>
       </View>
     </View>
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
+    color: '#3679fe',
     fontWeight: '700',
     marginLeft: 10,
   },

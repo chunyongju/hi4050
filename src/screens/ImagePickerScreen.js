@@ -23,7 +23,11 @@ const ImagePickerScreen = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <HeaderRight disabled={selectedPhotos.length < 1} onPress={onSelect} />
+        <HeaderRight
+          disabled={selectedPhotos.length < 1}
+          onPress={onSelect}
+          name="check"
+        />
       ),
     });
   }, [navigation, onSelect, selectedPhotos.length]);

@@ -82,7 +82,9 @@ const WriteTextScreen = () => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => <HeaderRight disabled={disabled} onPress={onSubmit} />,
+      headerRight: () => (
+        <HeaderRight disabled={disabled} onPress={onSubmit} name="check" />
+      ),
     });
   }, [navigation, disabled, onSubmit]);
 

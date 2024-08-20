@@ -18,3 +18,9 @@ export const DANGER = {
   DEFAULT: '#EF4444',
   DARK: '#B91C1C',
 };
+
+export const CHATC = {
+  LIGHT: '#ffffff',
+  DEFAULT: '#F6EB5D',
+  DARK: '#B9C7DA',
+};

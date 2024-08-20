@@ -7,6 +7,9 @@ import UpdateProfileScreen from '../screens/UpdateProfileScreen';
 import HeaderLeft from '../components/HeaderLeft';
 import ImagePickerScreen from '../screens/ImagePickerScreen';
 import WriteTextScreen from '../screens/WriteTextScreen';
+import MapScreen from '../screens/MapScreen';
+import ChatCreateScreen from '../screens/ChatCreateScreen';
+import ChatScreen from '../screens/ChatScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +40,10 @@ const MainStack = () => {
         component={ImagePickerScreen}
       />
       <Stack.Screen name={MainRoutes.WRITE_TEXT} component={WriteTextScreen} />
+      <Stack.Screen name={MainRoutes.MAP_VIEW} component={MapScreen} />
+
+      <Stack.Screen name={MainRoutes.CHAT_CRATE} component={ChatCreateScreen} />
+      <Stack.Screen name={MainRoutes.CHAT_ROOM} component={ChatScreen} />
     </Stack.Navigator>
   );
 };

@@ -31,11 +31,7 @@ const ProfileScreen = () => {
       />
       <View style={styles.settingButton}>
         <Pressable onPress={() => setVisible(true)} hitSlop={10}>
-          <MaterialCommunityIcons
-            name="logout-variant"
-            size={24}
-            color={GRAY.DARK}
-          />
+          <MaterialCommunityIcons name="logout" size={24} color={GRAY.DARK} />
         </Pressable>
       </View>
 
@@ -73,6 +69,8 @@ const styles = StyleSheet.create({
   settingButton: {
     paddingHorizontal: 20,
     alignItems: 'flex-end',
+    paddingTop: 15,
+    paddingBottom: 15,
   },
   profile: {
     justifyContent: 'center',

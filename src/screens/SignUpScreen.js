@@ -43,7 +43,7 @@ const SignUpScreen = () => {
       newForm.password !== newForm.passwordConfirm;
 
     dispatch({
-      type: AuthFormTypes.UPDATE_FROM,
+      type: AuthFormTypes.UPDATE_FORM,
       payload: { disabled, ...payload },
     });
   };

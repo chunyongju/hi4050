@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import ListScreen from '../screens/ListScreen';
-import MapScreen from '../screens/MapScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import ChatListScreen from '../screens/ChatListScreen';
 import { ContentRoutes } from './routes';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { GRAY, PRIMARY } from '../colors';
@@ -49,10 +49,11 @@ const ContentTab = () => {
         options={{ tabBarButton: () => <TabBarAddButton /> }}
       />
       <Tab.Screen
-        name={ContentRoutes.MAP}
-        component={MapScreen}
+        name={ContentRoutes.CHAT}
+        component={ChatListScreen}
         options={{
-          tabBarIcon: (props) => getTabBarIcon({ ...props, name: 'map' }),
+          tabBarIcon: (props) =>
+            getTabBarIcon({ ...props, name: 'chat-processing' }),
         }}
       />
       <Tab.Screen

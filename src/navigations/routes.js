@@ -9,11 +9,14 @@ export const MainRoutes = {
   UPDATE_PROFILE: 'UpdateProfile',
   IMAGE_PICKER: 'ImagePicker',
   WRITE_TEXT: 'WriteText',
+  MAP_VIEW: 'Map',
+  CHAT_CRATE: 'ChatCreate',
+  CHAT_ROOM: 'ChatRoom',
 };
 
 export const ContentRoutes = {
   HOME: 'Home',
   LIST: 'List',
-  MAP: 'Map',
+  CHAT: 'Chat',
   PROFILE: 'Profile',
 };
