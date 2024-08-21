@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { WHITE, GRAY, CHATC } from '../colors';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useUserState } from '../contexts/UserContext';
@@ -85,6 +85,7 @@ const renderBubble = (props) => {
         left: { color: GRAY.DARK },
         right: { color: GRAY.DARK },
       }}
+      renderUsernameOnMessage={false}
     />
   );
 };
@@ -137,10 +138,17 @@ const ChatScreen = ({ navigation, route }) => {
         onSend={_handleMessageSend}
         alwaysShowSend={true}
         renderAvatar={(props) => (
-          <Image
-            source={{ uri: props.currentMessage.user.avatar }}
-            style={{ width: 50, height: 50, borderRadius: 25 }}
-          />
+          <View style={{ alignItems: 'center' }}>
+            <Image
+              source={{ uri: props.currentMessage.user.avatar }}
+              style={{ width: 50, height: 50, borderRadius: 25 }}
+            />
+            {props.currentMessage.user.name && (
+              <Text style={{ color: GRAY.DARK }}>
+                {props.currentMessage.user.name}
+              </Text>
+            )}
+          </View>
         )}
         renderDay={(props) => (
           <Day {...props} textStyle={{ color: GRAY.DARK }} />
@@ -152,6 +160,7 @@ const ChatScreen = ({ navigation, route }) => {
           underlineColorAndroid: 'transparent', // Android only
         }}
         isTyping
+        dateFormat={'YYYY년 M월 D일'}
         multiline={true}
         renderUsernameOnMessage={true}
         scrollToBottom={true}
