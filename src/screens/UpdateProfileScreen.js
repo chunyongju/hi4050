@@ -1,4 +1,4 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import {
   Alert,
   Keyboard,
@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TextInput,
   View,
-  Platform,
 } from 'react-native';
 import { GRAY, WHITE } from '../colors';
 import FastImage from '../components/FastImage';
@@ -16,13 +15,12 @@ import SafeInputView from '../components/SafeInputView';
 import { useLayoutEffect, useEffect, useState, useCallback } from 'react';
 import HeaderRight from '../components/HeaderRight';
 import { updateUserInfo } from '../api/auth';
-import { MainRoutes } from '../navigations/routes';
-import { getLocalUri } from '../components/ImagePicker';
 import { uploadPhoto } from '../api/storage';
+import * as ImagePicker from 'expo-image-picker';
+import * as MediaLibrary from 'expo-media-library';
 
 const UpdateProfileScreen = () => {
   const navigation = useNavigation();
-  const { params } = useRoute();
 
   const [user, setUser] = useUserState();
 
@@ -32,13 +30,38 @@ const UpdateProfileScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (params) {
-      const { selectedPhotos } = params;
-      if (selectedPhotos?.length) {
-        setPhoto(selectedPhotos[0]);
+    (async () => {
+      const { granted } = await MediaLibrary.requestPermissionsAsync();
+      if (!granted) {
+        Alert.alert('사진 접근 권한', '사진 접근 권한이 필요합니다.', [
+          {
+            text: '확인',
+            onPress: () => {
+              navigation.canGoBack() && navigation.goBack();
+            },
+          },
+        ]);
       }
+    })();
+  }, [navigation]);
+
+  const _handleEditButton = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1,
+      });
+
+      if (!result.canceled) {
+        //console.log(result.assets[0].uri)
+        setPhoto(result.assets[0]);
+      }
+    } catch (e) {
+      Alert.alert('Photo Error', e.message);
     }
-  }, [params]);
+  };
 
   useEffect(() => {
     setDisabled(!displayName || isLoading);
@@ -49,12 +72,8 @@ const UpdateProfileScreen = () => {
     if (!disabled) {
       setIsLoading(true);
       try {
-        const localUri = Platform.select({
-          ios: await getLocalUri(photo.id),
-          android: photo.uri,
-        });
         const photoURL = await uploadPhoto({
-          uri: localUri,
+          uri: photo.uri,
           uid: user.uid,
         });
 
@@ -97,10 +116,7 @@ const UpdateProfileScreen = () => {
           ]}
         >
           <FastImage source={{ uri: photo.uri }} style={styles.photo} />
-          <Pressable
-            style={styles.imageButton}
-            onPress={() => navigation.navigate(MainRoutes.IMAGE_PICKER)}
-          >
+          <Pressable style={styles.imageButton} onPress={_handleEditButton}>
             <MaterialCommunityIcons name="image" size={20} color={WHITE} />
           </Pressable>
         </View>

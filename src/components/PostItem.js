@@ -27,6 +27,12 @@ const ActionSheetOptions = {
   destructiveColor: DANGER.DEFAULT,
 };
 
+const ActionSheetOptionsChat = {
+  options: ['대화하기', '취소'],
+  cancelButtonIndex: 1,
+  destructiveButtonIndex: 0,
+};
+
 const PostItem = memo(({ post }) => {
   const width = useWindowDimensions().width;
   const [user] = useUserState();
@@ -40,6 +46,12 @@ const PostItem = memo(({ post }) => {
       setVisible(true);
     } else if (idx === 1) {
       navigation.navigate(MainRoutes.WRITE_TEXT, { post });
+    }
+  };
+
+  const onPressActionSheetChat = (idx) => {
+    if (idx === 0) {
+      navigation.navigate(MainRoutes.CHAT_CRATE, { post });
     }
   };
 
@@ -79,6 +91,23 @@ const PostItem = memo(({ post }) => {
                 showActionSheetWithOptions(
                   ActionSheetOptions,
                   onPressActionSheet
+                )
+              }
+            >
+              <MaterialCommunityIcons
+                name="dots-horizontal"
+                size={24}
+                color={GRAY.DARK}
+              />
+            </Pressable>
+          )}
+          {post.user.uid !== user.uid && (
+            <Pressable
+              hitSlop={10}
+              onPress={() =>
+                showActionSheetWithOptions(
+                  ActionSheetOptionsChat,
+                  onPressActionSheetChat
                 )
               }
             >

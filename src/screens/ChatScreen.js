@@ -4,12 +4,13 @@ import { WHITE, GRAY, CHATC } from '../colors';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useUserState } from '../contexts/UserContext';
 import { createMessage } from '../api/chat';
-import { Alert } from 'react-native';
+import { Alert, Image } from 'react-native';
 import {
   GiftedChat,
   Send,
   InputToolbar,
   Bubble,
+  Day,
 } from 'react-native-gifted-chat';
 import { MaterialIcons } from '@expo/vector-icons';
 import {
@@ -80,6 +81,10 @@ const renderBubble = (props) => {
           color: '#000',
         },
       }}
+      timeTextStyle={{
+        left: { color: GRAY.DARK },
+        right: { color: GRAY.DARK },
+      }}
     />
   );
 };
@@ -130,9 +135,16 @@ const ChatScreen = ({ navigation, route }) => {
         messages={messages}
         user={{ _id: user.uid, name, avatar: user.photoURL }}
         onSend={_handleMessageSend}
-        renderAvatarOnTop={true}
-        showAvatarForEveryMessage={true}
         alwaysShowSend={true}
+        renderAvatar={(props) => (
+          <Image
+            source={{ uri: props.currentMessage.user.avatar }}
+            style={{ width: 50, height: 50, borderRadius: 25 }}
+          />
+        )}
+        renderDay={(props) => (
+          <Day {...props} textStyle={{ color: GRAY.DARK }} />
+        )}
         textInputProps={{
           autoCapitalize: 'none',
           autoCorrect: false,
