@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import TextButton from '../components/TextButton';
 import Input, { ReturnKeyTypes, InputTypes } from '../components/Input';
-import { useReducer, useRef } from 'react';
+import { useReducer, useRef, useEffect, useState } from 'react';
 import Button from '../components/Button';
 import HR from '../components/HR';
 import { StatusBar } from 'expo-status-bar';
@@ -22,7 +22,9 @@ import {
   initAuthForm,
 } from '../reducers/authFormReducer';
 import { getAuthErrorMessages, signUp } from '../api/auth';
+import { saveTests } from '../api/stest';
 import { useUserState } from '../contexts/UserContext';
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -34,6 +36,24 @@ const SignUpScreen = () => {
   const [form, dispatch] = useReducer(authFormReducer, initAuthForm);
 
   const [, setUser] = useUserState();
+  const [tests, setTests] = useState([]);
+
+  const { getItem, setItem } = useAsyncStorage('sTest');
+
+  const load = async () => {
+    try {
+      const data = await getItem();
+      const sTest = JSON.parse(data || '[]');
+      //console.log(sTest);
+      setTests(sTest);
+    } catch (e) {
+      Alert.alert('불러오기 실패', '데이터 불러오기에 실패했습니다.');
+    }
+  };
+
+  useEffect(() => {
+    load();
+  }, []);
 
   const updateForm = (payload) => {
     const newForm = { ...form, ...payload };
@@ -55,6 +75,16 @@ const SignUpScreen = () => {
       try {
         const user = await signUp(form);
         setUser(user);
+        /**
+        if (tests) {
+          //  await saveTests(user.uid, tests);
+          const sTestData = {
+            userId: user.uid, // 사용자 식별자
+            answers: tests,
+          };
+          saveTests(sTestData);
+        }
+           */
       } catch (e) {
         const message = getAuthErrorMessages(e.code);
         Alert.alert('회원가입 실패', message, [

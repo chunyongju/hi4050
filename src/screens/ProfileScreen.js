@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View, ScrollView } from 'react-native';
 import FastImage from '../components/FastImage';
 import { useUserState } from '../contexts/UserContext';
 import { logout } from '../api/auth';
@@ -6,10 +6,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { GRAY, WHITE } from '../colors';
 import DangerAlert, { AlertTypes } from '../components/DangerAlert';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { MainRoutes } from '../navigations/routes';
 import PostList from '../components/PostList';
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -17,6 +18,26 @@ const ProfileScreen = () => {
   const { top } = useSafeAreaInsets();
 
   const [visible, setVisible] = useState(false);
+  const [stests, setStests] = useState(true);
+
+  const [tests, setTests] = useState([]);
+
+  const { getItem, setItem } = useAsyncStorage('sTest');
+
+  const load = async () => {
+    try {
+      const data = await getItem();
+      const sTest = JSON.parse(data || '[]');
+      //console.log(sTest);
+      setTests(sTest);
+    } catch (e) {
+      Alert.alert('불러오기 실패', '데이터 불러오기에 실패했습니다.');
+    }
+  };
+
+  useEffect(() => {
+    load();
+  }, []);
 
   return (
     <View style={[styles.container, { paddingTop: top }]}>
@@ -55,7 +76,27 @@ const ProfileScreen = () => {
       </View>
 
       <View style={styles.listContainer}>
-        <PostList isMyPost={true} />
+        <View style={styles.tableHeader}>
+          <Pressable onPress={() => setStests(true)}>
+            <Text styles={styles.headerText}>진단결과</Text>
+          </Pressable>
+          <Pressable onPress={() => setStests(false)}>
+            <Text styles={styles.headerText}>내 사진</Text>
+          </Pressable>
+        </View>
+        {stests ? (
+          <ScrollView style={styles.container}>
+            {Object.entries(tests).map(([id, data]) => (
+              <View key={id} style={styles.tableRow}>
+                <Text style={styles.rowText}>
+                  문항: {id} = 답변: {data.index}. {data.value}
+                </Text>
+              </View>
+            ))}
+          </ScrollView>
+        ) : (
+          <PostList isMyPost={true} />
+        )}
       </View>
     </View>
   );
@@ -101,6 +142,30 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   listContainer: {
+    flex: 1,
+  },
+  tableHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    backgroundColor: '#ddd',
+  },
+  tableRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  headerText: {
+    fontSize: 16,
+    flex: 1,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  rowText: {
+    fontSize: 16,
     flex: 1,
   },
 });
