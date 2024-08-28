@@ -221,17 +221,14 @@ const TestScreen = () => {
                 </TouchableOpacity>
               ))}
             </View>
-            {currentIndex === questions.length && (
-              <TouchableOpacity
-                style={styles.signUpbutton}
-                onPress={sendSignUp}
-              >
-                <Text style={styles.signUpbuttonText}>회원가입</Text>
-              </TouchableOpacity>
-            )}
           </View>
         ))}
       </Swiper>
+      {currentIndex === questions.length && (
+        <TouchableOpacity style={styles.signUpbutton} onPress={sendSignUp}>
+          <Text style={styles.signUpbuttonText}>회원가입</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -291,7 +288,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    width: 120,
+    width: 110,
     height: 60,
     margin: 15,
     borderRadius: 20,
@@ -302,7 +299,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
   },
   disabledButton: {
-    width: 120,
+    width: 110,
     height: 60,
     margin: 15,
     borderRadius: 20,
@@ -340,7 +337,7 @@ const styles = StyleSheet.create({
     top: 'auto',
     bottom: 50,
     right: 20,
-    width: 120,
+    width: 110,
     height: 60,
     borderRadius: 20,
     backgroundColor: PRIMARY.DEFAULT,

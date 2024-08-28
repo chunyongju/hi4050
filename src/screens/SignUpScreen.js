@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import { AuthRoutes } from '../navigations/routes';
 import {
   Alert,
   Image,
@@ -155,7 +156,10 @@ const SignUpScreen = () => {
 
           <HR text={'OR'} styles={{ container: { marginVertical: 30 } }} />
 
-          <TextButton title={'로그인'} onPress={navigation.goBack} />
+          <TextButton
+            title={'로그인'}
+            onPress={() => navigation.navigate(AuthRoutes.SIGN_IN)}
+          />
         </ScrollView>
       </View>
     </SafeInputView>
