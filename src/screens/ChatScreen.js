@@ -12,7 +12,7 @@ import {
   Bubble,
   Day,
 } from 'react-native-gifted-chat';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {
   getFirestore,
   collection,
@@ -35,7 +35,7 @@ const SendButton = (props) => {
         marginHorizontal: 4,
       }}
     >
-      <MaterialIcons
+      <MaterialCommunityIcons
         name="send"
         size={24}
         color={props.text ? GRAY.DARK : GRAY.LIGHT}

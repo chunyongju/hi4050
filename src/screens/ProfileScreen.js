@@ -4,7 +4,7 @@ import { useUserState } from '../contexts/UserContext';
 import { logout } from '../api/auth';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { GRAY, WHITE } from '../colors';
+import { GRAY, WHITE, PRIMARY } from '../colors';
 import DangerAlert, { AlertTypes } from '../components/DangerAlert';
 import { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
@@ -77,11 +77,17 @@ const ProfileScreen = () => {
 
       <View style={styles.listContainer}>
         <View style={styles.tableHeader}>
-          <Pressable onPress={() => setStests(true)}>
-            <Text styles={styles.headerText}>진단결과</Text>
+          <Pressable
+            onPress={() => setStests(true)}
+            style={stests ? styles.headerTabTrue : styles.headerTabFalse}
+          >
+            <Text style={styles.headerText}>진단결과</Text>
           </Pressable>
-          <Pressable onPress={() => setStests(false)}>
-            <Text styles={styles.headerText}>내 사진</Text>
+          <Pressable
+            onPress={() => setStests(false)}
+            style={stests ? styles.headerTabFalse : styles.headerTabTrue}
+          >
+            <Text style={styles.headerText}>내 사진</Text>
           </Pressable>
         </View>
         {stests ? (
@@ -147,26 +153,40 @@ const styles = StyleSheet.create({
   tableHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    backgroundColor: '#ddd',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  headerTabTrue: {
+    flex: 1,
+    paddingVertical: 10,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerTabFalse: {
+    flex: 1,
+    paddingVertical: 10,
+    backgroundColor: '#ccc',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   tableRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingVertical: 8,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
   headerText: {
-    fontSize: 16,
-    flex: 1,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: '700',
+    color: PRIMARY.DARK,
   },
   rowText: {
     fontSize: 16,
     flex: 1,
+    color: GRAY.DARK,
   },
 });
 

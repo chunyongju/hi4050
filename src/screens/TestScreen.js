@@ -1,107 +1,107 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useState, useRef } from "react";
-import { Alert, View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import Swiper from "react-native-swiper";
-import { PRIMARY, WHITE } from "../colors";
-import { useAsyncStorage } from "@react-native-async-storage/async-storage";
-import { AuthRoutes } from "../navigations/routes";
+import { useNavigation } from '@react-navigation/native';
+import React, { useState, useRef } from 'react';
+import { Alert, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Swiper from 'react-native-swiper';
+import { PRIMARY, WHITE } from '../colors';
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
+import { AuthRoutes } from '../navigations/routes';
 
 const questions = [
   {
-    question: "나는 새로운 일에 도전하는 걸 즐기고 지적 호기심이 많다.",
+    question: '나는 새로운 일에 도전하는 걸 즐기고 지적 호기심이 많다.',
     options: [
-      "대체로 그런 편이다",
-      "대체로 그렇지 않은 편이다",
-      "상황을 우선 고려한다",
+      '대체로 그런 편이다',
+      '대체로 그렇지 않은 편이다',
+      '상황을 우선 고려한다',
     ],
     id: 1,
   },
   {
     question:
-      "나는 사람들이 생각하지 못한 새로운 아이디어를 만들고 성장의 기회로 삼는다.",
+      '나는 사람들이 생각하지 못한 새로운 아이디어를 만들고 성장의 기회로 삼는다.',
     options: [
-      "대체로 그런 편이다",
-      "대체로 그렇지 않은 편이다",
-      "상황을 우선 고려한다",
+      '대체로 그런 편이다',
+      '대체로 그렇지 않은 편이다',
+      '상황을 우선 고려한다',
     ],
     id: 2,
   },
   {
-    question: "나는 상상력이 풍부하며 관심 분야가 다양한 편이다.",
+    question: '나는 상상력이 풍부하며 관심 분야가 다양한 편이다.',
     options: [
-      "대체로 그런 편이다",
-      "대체로 그렇지 않은 편이다",
-      "상황을 우선 고려한다",
+      '대체로 그런 편이다',
+      '대체로 그렇지 않은 편이다',
+      '상황을 우선 고려한다',
     ],
     id: 3,
   },
   {
     question:
-      "나는 구체적인 방향이 정해지면 목표가 달성될 때까지 진로에서 벗어나지 않고 주력한다.",
+      '나는 구체적인 방향이 정해지면 목표가 달성될 때까지 진로에서 벗어나지 않고 주력한다.',
     options: [
-      "대체로 그런 편이다",
-      "대체로 그렇지 않은 편이다",
-      "상황을 우선 고려한다",
+      '대체로 그런 편이다',
+      '대체로 그렇지 않은 편이다',
+      '상황을 우선 고려한다',
     ],
     id: 4,
   },
   {
-    question: "나는 주어진 일을 성실히 수행하고 자기절제가 강하고 근면하다.",
+    question: '나는 주어진 일을 성실히 수행하고 자기절제가 강하고 근면하다.',
     options: [
-      "대체로 그런 편이다",
-      "대체로 그렇지 않은 편이다",
-      "상황을 우선 고려한다",
+      '대체로 그런 편이다',
+      '대체로 그렇지 않은 편이다',
+      '상황을 우선 고려한다',
     ],
     id: 5,
   },
   {
-    question: "나는 혼자 일하는 것보다 여러 사람과 함께 일하는 것을 즐긴다.",
+    question: '나는 혼자 일하는 것보다 여러 사람과 함께 일하는 것을 즐긴다.',
     options: [
-      "대체로 그런 편이다",
-      "대체로 그렇지 않은 편이다",
-      "상황을 우선 고려한다",
+      '대체로 그런 편이다',
+      '대체로 그렇지 않은 편이다',
+      '상황을 우선 고려한다',
     ],
     id: 6,
   },
   {
-    question: "나는 다른 사람을 설득하고 영향력 주는 활동을 좋아한다.",
+    question: '나는 다른 사람을 설득하고 영향력 주는 활동을 좋아한다.',
     options: [
-      "대체로 그런 편이다",
-      "대체로 그렇지 않은 편이다",
-      "상황을 우선 고려한다",
+      '대체로 그런 편이다',
+      '대체로 그렇지 않은 편이다',
+      '상황을 우선 고려한다',
     ],
     id: 7,
   },
   {
-    question: "나는 새로운 환경에 빠르게 적응하고 생산적이다.",
+    question: '나는 새로운 환경에 빠르게 적응하고 생산적이다.',
     options: [
-      "대체로 그런 편이다",
-      "대체로 그렇지 않은 편이다",
-      "상황을 우선 고려한다",
+      '대체로 그런 편이다',
+      '대체로 그렇지 않은 편이다',
+      '상황을 우선 고려한다',
     ],
     id: 8,
   },
   {
     question:
-      "나는 타인의 처지나 상황에 이입하여 그들의 감정을 잘 느낄 수 있다.",
+      '나는 타인의 처지나 상황에 이입하여 그들의 감정을 잘 느낄 수 있다.',
     options: [
-      "대체로 그런 편이다",
-      "대체로 그렇지 않은 편이다",
-      "상황을 우선 고려한다",
+      '대체로 그런 편이다',
+      '대체로 그렇지 않은 편이다',
+      '상황을 우선 고려한다',
     ],
     id: 9,
   },
   {
-    question: "나는 공감하고 협력적인 경향이 강하다.",
+    question: '나는 공감하고 협력적인 경향이 강하다.',
     options: [
-      "대체로 그런 편이다",
-      "대체로 그렇지 않은 편이다",
-      "상황을 우선 고려한다",
+      '대체로 그런 편이다',
+      '대체로 그렇지 않은 편이다',
+      '상황을 우선 고려한다',
     ],
     id: 10,
   },
   {
-    question: "완료되었습니다. 회원가입 후 결과를 확인하실 수 있습니다.",
+    question: '완료되었습니다. 회원가입 후 결과를 확인하실 수 있습니다.',
     options: [],
     id: 11,
   },
@@ -150,13 +150,13 @@ const TestScreen = () => {
     swiperRef.current.scrollBy(-1);
   };
 
-  const { getItem, setItem } = useAsyncStorage("sTest");
+  const { getItem, setItem } = useAsyncStorage('sTest');
 
   const save = async (data) => {
     try {
       await setItem(JSON.stringify(data));
     } catch (e) {
-      Alert.alert("저장하기 실패", "데이터 저장에 실패했습니다.");
+      Alert.alert('저장하기 실패', '데이터 저장에 실패했습니다.');
     }
   };
 
@@ -245,20 +245,20 @@ const styles = StyleSheet.create({
   wrapper: {},
   slide: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     backgroundColor: WHITE,
     padding: 30,
   },
   text: {
-    color: "#000",
+    color: '#000',
     fontSize: 25,
     marginBottom: 50,
   },
   optionsContainer: {
-    flexDirection: "column",
-    justifyContent: "center",
-    width: "100%",
+    flexDirection: 'column',
+    justifyContent: 'center',
+    width: '100%',
   },
   optionButton: {
     padding: 20,
@@ -279,21 +279,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   unselectedOptionText: {
-    color: "#000",
+    color: '#000',
     fontSize: 18,
   },
   buttonWrapper: {
-    backgroundColor: "transparent",
-    flexDirection: "row",
-    position: "absolute",
-    top: "auto",
+    backgroundColor: 'transparent',
+    flexDirection: 'row',
+    position: 'absolute',
+    top: 'auto',
     bottom: 30,
-    width: "100%",
+    width: '100%',
     height: 100,
-    justifyContent: "center",
-    paddingHorizontal: 10,
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
     paddingVertical: 10,
-    alignItems: "center",
+    alignItems: 'center',
   },
   buttonText: {
     color: WHITE,
@@ -302,59 +302,57 @@ const styles = StyleSheet.create({
   abledButton: {
     width: 110,
     height: 60,
-    margin: 15,
     borderRadius: 20,
     backgroundColor: PRIMARY.DARK,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   disabledButton: {
     width: 110,
     height: 60,
-    margin: 15,
     borderRadius: 20,
     backgroundColor: PRIMARY.LIGHT,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  paginationContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 30,
-    backgroundColor: "#fff",
-  },
-  progressBarBackground: {
-    height: 10,
-    flex: 1,
-    backgroundColor: "#e0e0e0",
-    borderRadius: 5,
-    marginRight: 10,
-  },
-  progressBarFill: {
-    height: "100%",
-    backgroundColor: PRIMARY.DARK,
-    borderRadius: 5,
-  },
-  paginationText: {
-    fontSize: 16,
-    color: "#333",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   signUpbutton: {
-    position: "absolute",
-    top: "auto",
+    position: 'absolute',
+    top: 'auto',
     bottom: 50,
     right: 20,
     width: 110,
     height: 60,
     borderRadius: 20,
     backgroundColor: PRIMARY.DEFAULT,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   signUpbuttonText: {
     color: WHITE,
     fontSize: 18,
+  },
+  paginationContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 30,
+    backgroundColor: '#fff',
+  },
+  progressBarBackground: {
+    height: 10,
+    flex: 1,
+    backgroundColor: '#e0e0e0',
+    borderRadius: 5,
+    marginRight: 10,
+  },
+  progressBarFill: {
+    height: '100%',
+    backgroundColor: PRIMARY.DARK,
+    borderRadius: 5,
+  },
+  paginationText: {
+    fontSize: 16,
+    color: '#333',
   },
 });
 

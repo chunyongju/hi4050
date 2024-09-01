@@ -4,7 +4,7 @@ import { StyleSheet, View, FlatList, Text, Pressable } from 'react-native';
 import { GRAY, WHITE, PRIMARY } from '../colors';
 import { MainRoutes } from '../navigations/routes';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {
   getFirestore,
   collection,
@@ -52,8 +52,8 @@ const ChatListScreen = () => {
           <Text style={styles.ItemDescription}>{description}</Text>
         </View>
         <Text style={styles.ItemTime}>{getDateOrTime(createdAt)}</Text>
-        <MaterialIcons
-          name="keyboard-arrow-right"
+        <MaterialCommunityIcons
+          name="chevron-right"
           size={24}
           color={GRAY.DARK}
         />
