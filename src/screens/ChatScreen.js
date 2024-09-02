@@ -21,6 +21,8 @@ import {
   doc,
   orderBy,
 } from 'firebase/firestore';
+import axios from 'axios';
+import { OPENAI_API_KEY } from '../../env';
 
 const SendButton = (props) => {
   return (
@@ -108,19 +110,83 @@ const ChatScreen = ({ navigation, route }) => {
       snapshot.forEach((doc) => {
         list.push(doc.data());
       });
-      setMessages(list);
+
+      if (list.length) {
+        setMessages(list);
+      } else {
+        // 초기 AI 메시지 설정
+        addBotMessage('안녕하세요. 저는 AI입니다.');
+      }
     });
     return () => unsubscribe();
   }, []);
 
   useLayoutEffect(() => {
-    navigation.setOptions({ headerTitle: route.params.title || 'Channel' });
+    navigation.setOptions({ headerTitle: route.params.title || '대화방' });
   }, []);
 
   const _handleMessageSend = async (messageList) => {
     const newMessage = messageList[0];
+    //console.log(messageList);
+    //console.log(newMessage['text']);
     try {
       await createMessage({ channelId: route.params.id, message: newMessage });
+      sendMessageToChatGPT(newMessage['text']);
+    } catch (e) {
+      Alert.alert('Send Message Error', e.message);
+    }
+  };
+
+  // ChatGPT API에 메시지 보내기
+  const sendMessageToChatGPT = async (message) => {
+    try {
+      const response = await axios.post(
+        'https://api.openai.com/v1/chat/completions',
+        {
+          model: 'gpt-4o',
+          messages: [
+            {
+              role: 'system',
+              content:
+                '당신은 40~50대 나이의 취미 모임 동료처럼, 짧고 친근하게 대답하는 AI입니다.',
+            },
+            { role: 'user', content: message },
+          ],
+          max_tokens: 150,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${OPENAI_API_KEY}`,
+          },
+        }
+      );
+
+      const botMessage = response.data.choices[0].message.content.trim();
+
+      // ChatGPT의 응답을 메시지 목록에 추가
+      addBotMessage(botMessage);
+    } catch (error) {
+      console.error('Error sending message to ChatGPT:', error);
+    }
+  };
+
+  // ChatGPT의 메시지를 UI에 추가하는 함수
+  const addBotMessage = async (text) => {
+    const botMessage = {
+      _id: Math.random().toString(),
+      text,
+      createdAt: new Date(),
+      user: {
+        _id: 'N1YdtnWb9ThxssEhzuj3WEPN1Wh1',
+        name: 'AI',
+        avatar:
+          'https://firebasestorage.googleapis.com/v0/b/hi4050.appspot.com/o/chatgpt.png?alt=media',
+      },
+    };
+
+    try {
+      await createMessage({ channelId: route.params.id, message: botMessage });
     } catch (e) {
       Alert.alert('Send Message Error', e.message);
     }
