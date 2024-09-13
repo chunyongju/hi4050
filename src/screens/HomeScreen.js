@@ -10,11 +10,12 @@ import {
 import { WHITE } from '../colors';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ContentRoutes } from '../navigations/routes';
+import { MainRoutes } from '../navigations/routes';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const { top } = useSafeAreaInsets();
-  const height = useWindowDimensions().height / 4;
+  const height = useWindowDimensions().height / 8;
 
   return (
     <View style={[styles.container, { paddingTop: top }]}>
@@ -40,6 +41,26 @@ const HomeScreen = () => {
             style={[styles.image, { height }]}
           />
           <Text style={styles.buttonTitle}>대화</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <Pressable onPress={() => navigation.navigate(MainRoutes.MAP_GPS)}>
+          <Image
+            source={require('../../assets/home-map.png')}
+            style={[styles.image, { height }]}
+          />
+          <Text style={styles.buttonTitle}>내 위치</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <Pressable onPress={() => navigation.navigate(MainRoutes.SAJU)}>
+          <Image
+            source={require('../../assets/home-clock.png')}
+            style={[styles.image, { height }]}
+          />
+          <Text style={styles.buttonTitle}>사주풀이/운세</Text>
         </Pressable>
       </View>
     </View>
@@ -80,7 +101,7 @@ const styles = StyleSheet.create({
   buttonTitle: {
     position: 'absolute',
     color: WHITE,
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: '700',
     bottom: 30,
     left: 30,

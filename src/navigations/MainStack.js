@@ -10,6 +10,9 @@ import WriteTextScreen from '../screens/WriteTextScreen';
 import MapScreen from '../screens/MapScreen';
 import ChatCreateScreen from '../screens/ChatCreateScreen';
 import ChatScreen from '../screens/ChatScreen';
+import GpsScreen from '../screens/GpsScreen';
+import SajuScreen from '../screens/SajuScreen';
+import SajuLuckScreen from '../screens/SajuLuckScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +47,10 @@ const MainStack = () => {
 
       <Stack.Screen name={MainRoutes.CHAT_CRATE} component={ChatCreateScreen} />
       <Stack.Screen name={MainRoutes.CHAT_ROOM} component={ChatScreen} />
+
+      <Stack.Screen name={MainRoutes.MAP_GPS} component={GpsScreen} />
+      <Stack.Screen name={MainRoutes.SAJU} component={SajuScreen} />
+      <Stack.Screen name={MainRoutes.SAJU_LUCK} component={SajuLuckScreen} />
     </Stack.Navigator>
   );
 };

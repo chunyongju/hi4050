@@ -15,6 +15,9 @@ export const MainRoutes = {
   MAP_VIEW: 'Map',
   CHAT_CRATE: 'ChatCreate',
   CHAT_ROOM: 'ChatRoom',
+  MAP_GPS: 'MapGps',
+  SAJU: 'Saju',
+  SAJU_LUCK: 'SajuLuck',
 };
 
 export const ContentRoutes = {
