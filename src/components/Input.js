@@ -42,18 +42,18 @@ const InputTypeProps = {
     ...PasswordProps,
   },
   TITLE: {
-    title: 'TITLE',
-    placeholder: '대화방명',
+    title: 'NAME',
+    placeholder: 'AI 이름',
     keyboardType: 'default',
     secureTextEntry: false,
-    iconName: { active: 'alpha-t-circle', inactive: 'alpha-t-circle-outline' },
+    iconName: { active: 'alpha-n-circle', inactive: 'alpha-n-circle-outline' },
   },
   DESCRIPTION: {
-    title: 'DESCRIPTION',
-    placeholder: '설명',
+    title: 'PROMPT',
+    placeholder: 'AI 역할 및 성격, 대답 형식',
     keyboardType: 'default',
     secureTextEntry: false,
-    iconName: { active: 'alpha-d-circle', inactive: 'alpha-d-circle-outline' },
+    iconName: { active: 'alpha-p-circle', inactive: 'alpha-p-circle-outline' },
   },
 };
 

@@ -14,6 +14,16 @@ export const createChannel = async ({ title, description }) => {
   return id;
 };
 
+export const updateChannel = async ({ id, title, description }) => {
+  const updatedData = {
+    id: id,
+    title: title,
+    description: description,
+    createdAt: Date.now(),
+  };
+  await setDoc(doc(getFirestore(), `channels/${id}`), updatedData);
+};
+
 export const createMessage = async ({ channelId, message }) => {
   const docRef = doc(
     getFirestore(),

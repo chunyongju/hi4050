@@ -1,10 +1,10 @@
 import {
-  Image,
   Platform,
   Pressable,
   StyleSheet,
   useWindowDimensions,
 } from 'react-native';
+import { Image } from 'expo-image'; // iOS오류 문제 GPT o1-preview가 해결
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { PRIMARY } from '../colors';
 import { BlurView } from 'expo-blur';
@@ -23,7 +23,7 @@ const PhotoItem = memo(({ item, isSelected, togglePhoto }) => {
       {isSelected && (
         <BlurView
           style={[StyleSheet.absoluteFill, styles.checkIcon]}
-          intensity={Platform.select({ ios: 10 })}
+          intensity={Platform.select({ ios: 10, android: 50 })}
         >
           <MaterialCommunityIcons
             name="check-circle"

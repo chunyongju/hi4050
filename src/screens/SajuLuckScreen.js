@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  ScrollView,
+  Platform,
+} from 'react-native';
 import axios from 'axios';
 import { SAJU_API_KEY } from '../../env';
 import Button from '../components/Button';
@@ -98,12 +105,19 @@ const SajuLuckScreen = () => {
         value={hour}
         onChangeText={setHour}
       />
-      <View style={styles.pickerContainer}>
+      <View
+        style={
+          Platform.OS === 'ios'
+            ? styles.pickerContainerIOS
+            : styles.pickerContainer
+        }
+      >
         <Text style={styles.pickerLabel}>운세 선택:</Text>
         <Picker
           selectedValue={fortuneType}
-          style={styles.picker}
+          style={Platform.OS === 'ios' ? styles.pickerIOS : styles.picker}
           onValueChange={(itemValue) => setFortuneType(itemValue)}
+          mode="dropdown"
         >
           <Picker.Item label="사업운" value="사업운" />
           <Picker.Item label="재물운" value="재물운" />
@@ -121,7 +135,42 @@ const SajuLuckScreen = () => {
         <View></View>
       ) : (
         <View style={styles.result}>
-          <Markdown>{result}</Markdown>
+          <Markdown
+            style={{
+              body: {
+                fontSize: 16,
+                lineHeight: 24, // 줄 간격 조정
+              },
+              heading1: {
+                marginVertical: 20,
+                fontWeight: 'bold',
+              },
+              heading2: {
+                marginVertical: 10,
+                fontWeight: 'bold',
+              },
+              heading3: {
+                marginVertical: 10,
+                fontWeight: 'bold',
+              },
+              heading4: {
+                marginVertical: 10,
+                fontWeight: 'bold',
+              },
+              heading5: {
+                marginVertical: 10,
+              },
+              heading6: {
+                marginVertical: 10,
+              },
+              listItem: {
+                marginVertical: 5,
+                lineHeight: 22, // 리스트 아이템 줄 간격
+              },
+            }}
+          >
+            {result}
+          </Markdown>
         </View>
       )}
 
@@ -142,6 +191,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     backgroundColor: '#fff',
+    paddingBottom: 40,
   },
   title: {
     fontSize: 24,
@@ -173,9 +223,20 @@ const styles = StyleSheet.create({
     color: GRAY.DARK,
     backgroundColor: GRAY.LIGHT,
   },
+  // iOS용 Picker 스타일
+  pickerContainerIOS: {
+    width: '100%',
+    marginBottom: 10,
+    overflow: 'hidden',
+  },
+  pickerIOS: {
+    height: 200, // iOS에서는 Picker의 높이를 넉넉하게 설정
+    borderWidth: 1,
+    borderColor: '#ccc',
+  },
   result: {
     width: '100%',
-    marginTop: 20,
+    marginTop: 30,
   },
 });
 

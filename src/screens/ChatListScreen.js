@@ -43,21 +43,37 @@ const ChatListScreen = () => {
 
   const Item = React.memo(({ item: { id, title, description, createdAt } }) => {
     return (
-      <Pressable
-        style={styles.ItemContainer}
-        onPress={() => navigation.navigate(MainRoutes.CHAT_ROOM, { id, title })}
-      >
-        <View style={styles.ItemTextContainer}>
-          <Text style={styles.ItemTitle}>{title}</Text>
-          <Text style={styles.ItemDescription}>{description}</Text>
-        </View>
-        <Text style={styles.ItemTime}>{getDateOrTime(createdAt)}</Text>
-        <MaterialCommunityIcons
-          name="chevron-right"
-          size={24}
-          color={GRAY.DARK}
-        />
-      </Pressable>
+      <View style={styles.ItemView}>
+        <Pressable
+          style={styles.ItemContainer}
+          onPress={() =>
+            navigation.navigate(MainRoutes.CHAT_ROOM, {
+              id,
+              title,
+              description,
+            })
+          }
+        >
+          <View style={styles.ItemTextContainer}>
+            <Text style={styles.ItemTitle}>{title}</Text>
+            <Text style={styles.ItemDescription}>{description}</Text>
+          </View>
+          <Text style={styles.ItemTime}>{getDateOrTime(createdAt)}</Text>
+          <MaterialCommunityIcons name="chat" size={24} color={GRAY.DARK} />
+        </Pressable>
+        <Pressable
+          style={styles.ItemUpdate}
+          onPress={() =>
+            navigation.navigate(MainRoutes.CHAT_CRATE, {
+              id,
+              title,
+              description,
+            })
+          }
+        >
+          <MaterialCommunityIcons name="pencil" size={24} color={GRAY.DARK} />
+        </Pressable>
+      </View>
     );
   });
 
@@ -100,6 +116,7 @@ const styles = StyleSheet.create({
     borderColor: GRAY.LIGHT,
   },
   ItemContainer: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
@@ -122,6 +139,15 @@ const styles = StyleSheet.create({
   ItemTime: {
     fontSize: 12,
     color: GRAY.DEFAULT,
+    marginRight: 5,
+  },
+  ItemView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  ItemUpdate: {
+    flex: 0.2,
+    alignItems: 'center',
   },
 });
 

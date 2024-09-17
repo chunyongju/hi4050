@@ -17,13 +17,13 @@ const ImageSwiper = ({ photos }) => {
           <FastImage
             source={{ uri: photo.uri ?? photo }}
             style={StyleSheet.absoluteFill}
-            resizeMode="cover"
+            contentFit="cover"
           />
           <BlurView intensity={Platform.select({ ios: 10, android: 100 })}>
             <FastImage
               source={{ uri: photo.uri ?? photo }}
               style={styles.photo}
-              resizeMode="contain"
+              contentFit="contain"
             />
           </BlurView>
         </View>

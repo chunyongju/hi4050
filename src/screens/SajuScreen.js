@@ -104,7 +104,42 @@ const SajuScreen = () => {
         <View></View>
       ) : (
         <View style={styles.result}>
-          <Markdown>{result}</Markdown>
+          <Markdown
+            style={{
+              body: {
+                fontSize: 16,
+                lineHeight: 24, // 줄 간격 조정
+              },
+              heading1: {
+                marginVertical: 20,
+                fontWeight: 'bold',
+              },
+              heading2: {
+                marginVertical: 10,
+                fontWeight: 'bold',
+              },
+              heading3: {
+                marginVertical: 10,
+                fontWeight: 'bold',
+              },
+              heading4: {
+                marginVertical: 10,
+                fontWeight: 'bold',
+              },
+              heading5: {
+                marginVertical: 10,
+              },
+              heading6: {
+                marginVertical: 10,
+              },
+              listItem: {
+                marginVertical: 5,
+                lineHeight: 22, // 리스트 아이템 줄 간격
+              },
+            }}
+          >
+            {result}
+          </Markdown>
         </View>
       )}
 
@@ -125,6 +160,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     backgroundColor: '#fff',
+    paddingBottom: 40,
   },
   title: {
     fontSize: 24,
@@ -143,7 +179,7 @@ const styles = StyleSheet.create({
   },
   result: {
     width: '100%',
-    marginTop: 20,
+    marginTop: 30,
   },
 });
 

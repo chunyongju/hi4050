@@ -115,7 +115,7 @@ const ChatScreen = ({ navigation, route }) => {
         setMessages(list);
       } else {
         // 초기 AI 메시지 설정
-        addBotMessage('안녕하세요. 저는 AI입니다.');
+        addBotMessage(`안녕하세요. 저는 ${route.params.title}입니다.`);
       }
     });
     return () => unsubscribe();
@@ -147,12 +147,11 @@ const ChatScreen = ({ navigation, route }) => {
           messages: [
             {
               role: 'system',
-              content:
-                '당신은 40~50대 나이의 취미 모임 동료처럼, 짧고 친근하게 대답하는 AI입니다.',
+              content: `당신의 이름은 ${route.params.title}이고, ${route.params.description}, 대화형식으로 답해주세요.`,
             },
             { role: 'user', content: message },
           ],
-          max_tokens: 150,
+          max_tokens: 500,
         },
         {
           headers: {
@@ -179,7 +178,7 @@ const ChatScreen = ({ navigation, route }) => {
       createdAt: new Date(),
       user: {
         _id: 'N1YdtnWb9ThxssEhzuj3WEPN1Wh1',
-        name: 'AI',
+        name: route.params.title,
         avatar:
           'https://firebasestorage.googleapis.com/v0/b/hi4050.appspot.com/o/chatgpt.png?alt=media',
       },

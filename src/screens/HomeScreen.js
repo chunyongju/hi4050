@@ -21,7 +21,7 @@ const HomeScreen = () => {
     <View style={[styles.container, { paddingTop: top }]}>
       <View style={styles.topContainer}>
         <Image source={require('../../assets/icon.png')} style={styles.icon} />
-        <Text style={styles.title}>Hi 4050</Text>
+        <Text style={styles.title}>HeeVa</Text>
       </View>
 
       <View style={styles.buttonContainer}>
