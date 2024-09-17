@@ -36,5 +36,4 @@ yarn-error.*
 
 env.js
 .vscode/
-assets/
 .prettierrc

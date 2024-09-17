@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "hi4050",
+    "name": "HeeVa",
     "slug": "hi4050",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -12,21 +12,36 @@
       "backgroundColor": "#3679fe"
     },
     "ios": {
-      "supportsTablet": true,
+      "bundleIdentifier": "com.hi4050.HeeVa",
+      "buildNumber": "1.0.0",
+      "supportsTablet": false,
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "The app accesses the photo library to upload a profile photo and use it on the post."
       }
     },
     "android": {
+      "package": "com.hi4050.HeeVa",
+      "versionCode": 1,
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "CAMERA"
+      ],
+      "icon": "./assets/android-icon.png",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/android-icon.png",
         "backgroundColor": "#3679fe"
-      },
-      "permissions": ["READ_EXTERNAL_STORAGE"]
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-asset"]
+    "plugins": [
+      "expo-asset"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "1b110a61-963d-4e7e-975a-22f0e064ccc2"
+      }
+    }
   }
 }
