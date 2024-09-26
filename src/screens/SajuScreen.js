@@ -42,7 +42,6 @@ const SajuScreen = () => {
             },
             { role: 'user', content: userPrompt },
           ],
-          max_tokens: 1200,
         },
         {
           headers: {
@@ -108,33 +107,7 @@ const SajuScreen = () => {
             style={{
               body: {
                 fontSize: 16,
-                lineHeight: 24, // 줄 간격 조정
-              },
-              heading1: {
-                marginVertical: 20,
-                fontWeight: 'bold',
-              },
-              heading2: {
-                marginVertical: 10,
-                fontWeight: 'bold',
-              },
-              heading3: {
-                marginVertical: 10,
-                fontWeight: 'bold',
-              },
-              heading4: {
-                marginVertical: 10,
-                fontWeight: 'bold',
-              },
-              heading5: {
-                marginVertical: 10,
-              },
-              heading6: {
-                marginVertical: 10,
-              },
-              listItem: {
-                marginVertical: 5,
-                lineHeight: 22, // 리스트 아이템 줄 간격
+                lineHeight: 24,
               },
             }}
           >

@@ -18,6 +18,7 @@ export const MainRoutes = {
   MAP_GPS: 'MapGps',
   SAJU: 'Saju',
   SAJU_LUCK: 'SajuLuck',
+  TAROT_CARD: 'TarotCard',
 };
 
 export const ContentRoutes = {

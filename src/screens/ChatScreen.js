@@ -140,17 +140,33 @@ const ChatScreen = ({ navigation, route }) => {
   // ChatGPT API에 메시지 보내기
   const sendMessageToChatGPT = async (message) => {
     try {
+      // [대화의 맥락을 유지하는 챗봇으로 변경] 현재까지의 대화 메시지를 ChatGPT 형식으로 변환
+      const chatMessages = messages
+        .map((msg) => {
+          return {
+            role: msg.user._id === user.uid ? 'user' : 'assistant',
+            content: msg.text,
+          };
+        })
+        .reverse(); // 시간 순서대로 정렬 (과거 -> 현재)
+
+      // 새로운 사용자 메시지를 추가
+      chatMessages.push({ role: 'user', content: message });
+
+      // 시스템 메시지를 맨 앞에 추가 (옵션)
+      chatMessages.unshift({
+        role: 'system',
+        content: `당신의 이름은 ${route.params.title}이고, ${route.params.description}, 대화형식으로 답해주세요.`,
+      });
+
+      // 필요한 경우 최근 N개의 메시지만 사용 (토큰 제한 고려)
+      const recentMessages = chatMessages.slice(-15); // 최근 15개의 메시지 사용
+
       const response = await axios.post(
         'https://api.openai.com/v1/chat/completions',
         {
           model: 'gpt-4o',
-          messages: [
-            {
-              role: 'system',
-              content: `당신의 이름은 ${route.params.title}이고, ${route.params.description}, 대화형식으로 답해주세요.`,
-            },
-            { role: 'user', content: message },
-          ],
+          messages: recentMessages,
           max_tokens: 500,
         },
         {

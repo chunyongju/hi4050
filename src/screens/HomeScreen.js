@@ -25,16 +25,6 @@ const HomeScreen = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <Pressable onPress={() => navigation.navigate(ContentRoutes.LIST)}>
-          <Image
-            source={require('../../assets/home-map.png')}
-            style={[styles.image, { height }]}
-          />
-          <Text style={styles.buttonTitle}>여행사진공유</Text>
-        </Pressable>
-      </View>
-
-      <View style={styles.buttonContainer}>
         <Pressable onPress={() => navigation.navigate(ContentRoutes.CHAT)}>
           <Image
             source={require('../../assets/home-clock.png')}
@@ -61,6 +51,16 @@ const HomeScreen = () => {
             style={[styles.image, { height }]}
           />
           <Text style={styles.buttonTitle}>사주풀이/운세</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <Pressable onPress={() => navigation.navigate(MainRoutes.TAROT_CARD)}>
+          <Image
+            source={require('../../assets/home-map.png')}
+            style={[styles.image, { height }]}
+          />
+          <Text style={styles.buttonTitle}>타로카드</Text>
         </Pressable>
       </View>
     </View>

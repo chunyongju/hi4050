@@ -13,6 +13,7 @@ import ChatScreen from '../screens/ChatScreen';
 import GpsScreen from '../screens/GpsScreen';
 import SajuScreen from '../screens/SajuScreen';
 import SajuLuckScreen from '../screens/SajuLuckScreen';
+import TarotCardScreen from '../screens/TarotCardScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,7 @@ const MainStack = () => {
       <Stack.Screen name={MainRoutes.MAP_GPS} component={GpsScreen} />
       <Stack.Screen name={MainRoutes.SAJU} component={SajuScreen} />
       <Stack.Screen name={MainRoutes.SAJU_LUCK} component={SajuLuckScreen} />
+      <Stack.Screen name={MainRoutes.TAROT_CARD} component={TarotCardScreen} />
     </Stack.Navigator>
   );
 };
