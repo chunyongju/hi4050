@@ -7,6 +7,7 @@ import {
   ScrollView,
   StyleSheet,
   View,
+  Text,
 } from 'react-native';
 import TextButton from '../components/TextButton';
 import Input, { ReturnKeyTypes, InputTypes } from '../components/Input';
@@ -145,6 +146,20 @@ const SignUpScreen = () => {
             onSubmitEditing={onSubmit}
             styles={{ container: { marginBottom: 20 } }}
           />
+
+          <View style={{ flexDirection: 'row', paddingRight: 40 }}>
+            <TextButton
+              title={'개인정보처리방침'}
+              onPress={() => navigation.navigate(AuthRoutes.PRIVACY)}
+            />
+            <View style={{ marginLeft: 20, marginRight: 40 }}>
+              <Text>|</Text>
+            </View>
+            <TextButton
+              title={'이용약관'}
+              onPress={() => navigation.navigate(AuthRoutes.POLICY)}
+            />
+          </View>
 
           <Button
             title="회원가입"

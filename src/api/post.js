@@ -10,6 +10,8 @@ import {
   startAfter,
   where,
   deleteDoc,
+  updateDoc,
+  increment,
 } from 'firebase/firestore';
 
 export const createPost = async ({ photos, location, text, user }) => {
@@ -25,10 +27,25 @@ export const createPost = async ({ photos, location, text, user }) => {
       text,
       user: { uid, displayName, photoURL },
       createdTs: Date.now(),
+      alert: 0, // 신고 횟수 초기화
     });
   } catch (e) {
     console.log('createPost error: ', e);
     throw new Error('글 작성 실패');
+  }
+};
+
+// 신고 기능 - alert 필드를 증가시킴
+export const reportPost = async (postId) => {
+  try {
+    const postRef = doc(getFirestore(), `posts/${postId}`);
+    await updateDoc(postRef, {
+      alert: increment(1), // 신고 횟수 증가
+    });
+    console.log('Post reported successfully');
+  } catch (e) {
+    console.log('reportPost error: ', e);
+    throw new Error('신고 실패');
   }
 };
 

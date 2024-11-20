@@ -25,13 +25,18 @@ const IntroScreen = () => {
         <Text style={styles.title}>HeeVa</Text>
       </View>
 
+      <View style={[styles.topContainer, { marginBottom: 0 }]}>
+        <Text style={{ fontSize: 16 }}>
+          회원 가입전에 나의 성향을 먼저 알아보세요.
+        </Text>
+      </View>
       <View style={styles.buttonContainer}>
         <Pressable onPress={() => navigation.navigate(AuthRoutes.START)}>
           <Image
             source={require('../../assets/home-clock.png')}
             style={[styles.image, { height }]}
           />
-          <Text style={styles.buttonTitle}>진단하기</Text>
+          <Text style={styles.buttonTitle}>나의 성향검사</Text>
         </Pressable>
       </View>
 

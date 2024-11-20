@@ -25,7 +25,7 @@ const ContentTab = () => {
         headerShown: false,
         tabBarActiveTintColor: PRIMARY.DARK,
         tabBarInactiveTintColor: GRAY.DARK,
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
       }}
     >
       <Tab.Screen
@@ -41,6 +41,7 @@ const ContentTab = () => {
         component={ListScreen}
         options={{
           tabBarIcon: (props) => getTabBarIcon({ ...props, name: 'post' }),
+          tabBarLabel: '사진',
         }}
       />
       <Tab.Screen
@@ -54,6 +55,7 @@ const ContentTab = () => {
         options={{
           tabBarIcon: (props) =>
             getTabBarIcon({ ...props, name: 'chat-processing' }),
+          tabBarLabel: '대화',
         }}
       />
       <Tab.Screen
@@ -61,6 +63,7 @@ const ContentTab = () => {
         component={ProfileScreen}
         options={{
           tabBarIcon: (props) => getTabBarIcon({ ...props, name: 'account' }),
+          tabBarLabel: '프로필',
         }}
       />
     </Tab.Navigator>

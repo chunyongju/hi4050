@@ -56,7 +56,9 @@ const ChatListScreen = () => {
         >
           <View style={styles.ItemTextContainer}>
             <Text style={styles.ItemTitle}>{title}</Text>
-            <Text style={styles.ItemDescription}>{description}</Text>
+            <Text style={styles.ItemDescription}>
+              {description.substr(0, 18)}
+            </Text>
           </View>
           <Text style={styles.ItemTime}>{getDateOrTime(createdAt)}</Text>
           <MaterialCommunityIcons name="chat" size={24} color={GRAY.DARK} />

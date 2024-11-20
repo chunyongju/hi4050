@@ -87,6 +87,7 @@ const defaultStyles = StyleSheet.create({
     paddingVertical: 20,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 10,
   },
   title: {
     color: WHITE,

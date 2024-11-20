@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
+  deleteUser,
 } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { initFirebase } from '../api/firebase';
@@ -62,4 +63,8 @@ export const updateUserInfo = async (userInfo) => {
   } catch (e) {
     throw new Error('사용자 정보 수정에 실패했습니다.');
   }
+};
+
+export const deleteAccount = async () => {
+  await deleteUser(auth.currentUser);
 };

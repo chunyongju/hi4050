@@ -35,12 +35,12 @@ const HomeScreen = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <Pressable onPress={() => navigation.navigate(MainRoutes.MAP_GPS)}>
+        <Pressable onPress={() => navigation.navigate(ContentRoutes.LIST)}>
           <Image
             source={require('../../assets/home-map.png')}
             style={[styles.image, { height }]}
           />
-          <Text style={styles.buttonTitle}>내 위치</Text>
+          <Text style={styles.buttonTitle}>여행사진 공유</Text>
         </Pressable>
       </View>
 

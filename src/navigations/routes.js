@@ -1,9 +1,12 @@
 export const AuthRoutes = {
+  INTRO_START: 'IntroStart',
   INTRO: 'Intro',
   START: 'TestStart',
   TEST: 'Test',
   SIGN_IN: 'SignIn',
   SIGN_UP: 'SignUp',
+  PRIVACY: 'Privacy',
+  POLICY: 'Policy',
 };
 
 export const MainRoutes = {

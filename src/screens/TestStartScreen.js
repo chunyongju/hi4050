@@ -9,16 +9,13 @@ const TestStartScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>퇴직하고 뭐하세요?</Text>
-      <Text style={styles.subtitle}>
-        나에게는 어떤 뉴업 New-UP(業)이 어울릴까요?
-      </Text>
-      <Text style={styles.content}>직장인으로 살아 온 우리 모두,</Text>
-      <Text style={styles.content}>언젠가 한번은 퇴직을 맞이 합니다</Text>
-      <Text style={styles.content}>이미 퇴직을 했든,</Text>
-      <Text style={styles.content}>아직 현직에서 활약하든,</Text>
-      <Text style={styles.content}>퇴직 이후의 여정은 정말 중요하죠</Text>
-      <Text style={styles.content}>NPT(New-UP Planning Tool)은</Text>
+      <Text style={styles.title}>나의 성향은 어떨까요?</Text>
+      <Text style={styles.subtitle}>나에게는 어떤 상대가 어울릴까요?</Text>
+      <Text style={styles.content}>비슷한 경험과 가치관을 공유하는</Text>
+      <Text style={styles.content}>새로운 사람을 만나는 것을</Text>
+      <Text style={styles.content}>안전하고 편안하게 소통하기 위해</Text>
+      <Text style={styles.content}>먼저 나부터 알아보는 것은 중요하죠</Text>
+      <Text style={styles.content}>나의 성향 진단 검사는</Text>
       <Text style={styles.impotent}>개인의 성향, 가치 목표, 역량</Text>
       <Text style={styles.content}>에 기반하여 구조화되어 있습니다.</Text>
 
@@ -30,7 +27,7 @@ const TestStartScreen = () => {
         styles={{ container: { marginTop: 20 } }}
       />
       <Text style={styles.graycontent}>
-        총 10개 문항으로 구성되어 있으며, 약 1분 가량 소요됩니다.
+        * 총 10개 문항으로 구성되어 있으며, 약 1분 가량 소요됩니다.
       </Text>
     </View>
   );

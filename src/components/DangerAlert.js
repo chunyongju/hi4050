@@ -7,6 +7,9 @@ import Button, { ButtonTypes } from './Button';
 export const AlertTypes = {
   LOGOUT: 'LOGOUT',
   DELETE_POST: 'DELETE_POST',
+  DELETE_ACCOUNT: 'DELETE_ACCOUNT',
+  USER_ALERT: 'USER_ALERT',
+  USER_BLOCKING: 'USER_BLOCKING',
 };
 
 const DangerAlertProps = {
@@ -19,6 +22,21 @@ const DangerAlertProps = {
     iconName: 'delete-variant',
     title: '글 삭제',
     message: '정말 삭제하시겠습니까?',
+  },
+  DELETE_ACCOUNT: {
+    iconName: 'account-off-outline',
+    title: '내 계정 삭제',
+    message: '정말 삭제하시겠습니까?',
+  },
+  USER_ALERT: {
+    iconName: 'account-alert-outline',
+    title: '게시글 신고하기',
+    message: '이 게시글을 신고하시겠습니까?',
+  },
+  USER_BLOCKING: {
+    iconName: 'account-cancel-outline',
+    title: '사용자 차단하기',
+    message: '해당 사용자를 차단하시겠습니까?',
   },
 };
 

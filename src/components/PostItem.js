@@ -28,9 +28,10 @@ const ActionSheetOptions = {
 };
 
 const ActionSheetOptionsChat = {
-  options: ['대화하기', '취소'],
-  cancelButtonIndex: 1,
-  destructiveButtonIndex: 0,
+  options: ['게시글 신고하기', '사용자 차단하기', '취소'],
+  cancelButtonIndex: 2,
+  destructiveButtonIndex: 1,
+  destructiveColor: DANGER.DEFAULT,
 };
 
 const PostItem = memo(({ post }) => {
@@ -40,6 +41,8 @@ const PostItem = memo(({ post }) => {
   const navigation = useNavigation();
 
   const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+  const [visible3, setVisible3] = useState(false);
 
   const onPressActionSheet = (idx) => {
     if (idx === 0) {
@@ -51,11 +54,15 @@ const PostItem = memo(({ post }) => {
 
   const onPressActionSheetChat = (idx) => {
     if (idx === 0) {
-      navigation.navigate(MainRoutes.CHAT_CRATE, { post });
+      setVisible2(true);
+    } else if (idx === 1) {
+      setVisible3(true);
     }
   };
 
   const onClose = () => setVisible(false);
+  const onClose2 = () => setVisible2(false);
+  const onClose3 = () => setVisible3(false);
 
   return (
     <>
@@ -71,6 +78,25 @@ const PostItem = memo(({ post }) => {
             Alert.alert('글 삭제에 실패했습니다.');
             onClose();
           }
+        }}
+      />
+      <DangerAlert
+        alertType={AlertTypes.USER_ALERT}
+        visible={visible2}
+        onClose={onClose2}
+        onConfirm={async () => {
+          await reportPost(post.id);
+          Alert.alert('해당 게시글을 신고했습니다.');
+          onClose2();
+        }}
+      />
+      <DangerAlert
+        alertType={AlertTypes.USER_BLOCKING}
+        visible={visible3}
+        onClose={onClose3}
+        onConfirm={async () => {
+          Alert.alert('해당 사용자를 차단 처리했습니다.');
+          onClose3();
         }}
       />
 

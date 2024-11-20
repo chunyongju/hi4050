@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, View, ScrollView } from 'react-native';
 import FastImage from '../components/FastImage';
 import { useUserState } from '../contexts/UserContext';
-import { logout } from '../api/auth';
+import { logout, deleteAccount } from '../api/auth';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { GRAY, WHITE, PRIMARY } from '../colors';
@@ -18,6 +18,7 @@ const ProfileScreen = () => {
   const { top } = useSafeAreaInsets();
 
   const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
   const [stests, setStests] = useState(true);
 
   const [tests, setTests] = useState([]);
@@ -48,6 +49,21 @@ const ProfileScreen = () => {
         onConfirm={async () => {
           await logout();
           setUser({});
+        }}
+      />
+      <DangerAlert
+        visible={visible2}
+        onClose={() => setVisible2(false)}
+        alertType={AlertTypes.DELETE_ACCOUNT}
+        onConfirm={async () => {
+          try {
+            await deleteAccount();
+            Alert.alert('내 계정 삭제에 성공했습니다.');
+            setUser({});
+          } catch (e) {
+            Alert.alert('내 계정 삭제에 실패했습니다.');
+            onClose();
+          }
         }}
       />
       <View style={styles.settingButton}>
@@ -81,7 +97,7 @@ const ProfileScreen = () => {
             onPress={() => setStests(true)}
             style={stests ? styles.headerTabTrue : styles.headerTabFalse}
           >
-            <Text style={styles.headerText}>진단결과</Text>
+            <Text style={styles.headerText}>설정</Text>
           </Pressable>
           <Pressable
             onPress={() => setStests(false)}
@@ -89,9 +105,26 @@ const ProfileScreen = () => {
           >
             <Text style={styles.headerText}>내 사진</Text>
           </Pressable>
+          <Pressable
+            onPress={() => setVisible2(true)}
+            style={[
+              styles.headerTabFalse,
+              { borderLeftWidth: 1, borderLeftColor: WHITE },
+            ]}
+          >
+            <Text style={styles.headerText}>내 계정 삭제</Text>
+          </Pressable>
         </View>
         {stests ? (
           <ScrollView style={styles.container}>
+            <View style={styles.centerEmail}>
+              <Text style={{ fontSize: 18 }}>
+                지원팀 연락처 : yjct90@naver.com
+              </Text>
+              <Text style={{ fontSize: 15, color: GRAY.DARK }}>
+                * 불편사항 및 악성 사용자 신고처입니다.
+              </Text>
+            </View>
             {Object.entries(tests).map(([id, data]) => (
               <View key={id} style={styles.tableRow}>
                 <Text style={styles.rowText}>
@@ -187,6 +220,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     flex: 1,
     color: GRAY.DARK,
+  },
+  centerEmail: {
+    padding: 15,
+    flex: 1,
   },
 });
 
