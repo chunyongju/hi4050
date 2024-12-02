@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { getPosts } from '../api/post';
 
-const usePosts = (uid) => {
+const usePosts = (isMyPost, uid) => {
   const [data, setData] = useState([]);
   const [refetching, setRefetching] = useState(false);
 
@@ -13,6 +13,7 @@ const usePosts = (uid) => {
       isLoadingRef.current = true;
       const { list, last } = await getPosts({
         after: lastRef.current,
+        isMyPost,
         uid,
       });
       if (list.length > 0) {

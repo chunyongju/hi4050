@@ -13,7 +13,7 @@ const IntroStartScreen = () => {
 
   return (
     <SafeInputView>
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
       <View style={[styles.container, { paddingTop: top }]}>
         <View style={StyleSheet.absoluteFill}>
           <Image

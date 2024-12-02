@@ -10,6 +10,8 @@ import WriteTextScreen from '../screens/WriteTextScreen';
 import MapScreen from '../screens/MapScreen';
 import ChatCreateScreen from '../screens/ChatCreateScreen';
 import ChatScreen from '../screens/ChatScreen';
+import CounselCreateScreen from '../screens/CounselCreateScreen';
+import CounselScreen from '../screens/counselScreen';
 import GpsScreen from '../screens/GpsScreen';
 import SajuScreen from '../screens/SajuScreen';
 import SajuLuckScreen from '../screens/SajuLuckScreen';
@@ -48,6 +50,12 @@ const MainStack = () => {
 
       <Stack.Screen name={MainRoutes.CHAT_CRATE} component={ChatCreateScreen} />
       <Stack.Screen name={MainRoutes.CHAT_ROOM} component={ChatScreen} />
+
+      <Stack.Screen
+        name={MainRoutes.COUNSEL_CRATE}
+        component={CounselCreateScreen}
+      />
+      <Stack.Screen name={MainRoutes.COUNSEL_ROOM} component={CounselScreen} />
 
       <Stack.Screen name={MainRoutes.MAP_GPS} component={GpsScreen} />
       <Stack.Screen name={MainRoutes.SAJU} component={SajuScreen} />

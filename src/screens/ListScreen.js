@@ -12,20 +12,7 @@ const ListScreen = () => {
 
   return (
     <View style={[styles.container, { paddingTop: top }]}>
-      <View style={styles.settingButton}>
-        <Pressable
-          onPress={() => navigation.navigate(MainRoutes.MAP_VIEW)}
-          hitSlop={10}
-        >
-          <MaterialCommunityIcons
-            name="map"
-            size={24}
-            color={PRIMARY.DEFAULT}
-          />
-        </Pressable>
-      </View>
-
-      <PostList />
+      <PostList isMyPost={false} />
     </View>
   );
 };

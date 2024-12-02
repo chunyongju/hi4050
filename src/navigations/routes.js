@@ -18,6 +18,8 @@ export const MainRoutes = {
   MAP_VIEW: 'Map',
   CHAT_CRATE: 'ChatCreate',
   CHAT_ROOM: 'ChatRoom',
+  COUNSEL_CRATE: 'CounselCreate',
+  COUNSEL_ROOM: 'CounselRoom',
   MAP_GPS: 'MapGps',
   SAJU: 'Saju',
   SAJU_LUCK: 'SajuLuck',

@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 const PostList = ({ isMyPost }) => {
   const [user] = useUserState();
   const { data, fetchNextPage, refetch, refetching, deletePost, updatePost } =
-    usePosts(isMyPost && user.uid);
+    usePosts(isMyPost, user.uid);
 
   useEffect(() => {
     event.addListener(EventTypes.REFRESH, refetch);

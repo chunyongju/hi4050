@@ -100,12 +100,6 @@ const ProfileScreen = () => {
             <Text style={styles.headerText}>설정</Text>
           </Pressable>
           <Pressable
-            onPress={() => setStests(false)}
-            style={stests ? styles.headerTabFalse : styles.headerTabTrue}
-          >
-            <Text style={styles.headerText}>내 사진</Text>
-          </Pressable>
-          <Pressable
             onPress={() => setVisible2(true)}
             style={[
               styles.headerTabFalse,

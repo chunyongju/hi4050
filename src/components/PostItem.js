@@ -15,7 +15,7 @@ import { memo, useState } from 'react';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { useUserState } from '../contexts/UserContext';
 import DangerAlert, { AlertTypes } from './DangerAlert';
-import { deletePost } from '../api/post';
+import { deletePost, reportPost, blockUser } from '../api/post';
 import event, { EventTypes } from '../event';
 import { useNavigation } from '@react-navigation/native';
 import { MainRoutes } from '../navigations/routes';
@@ -30,7 +30,7 @@ const ActionSheetOptions = {
 const ActionSheetOptionsChat = {
   options: ['게시글 신고하기', '사용자 차단하기', '취소'],
   cancelButtonIndex: 2,
-  destructiveButtonIndex: 1,
+  destructiveButtonIndex: [0, 1],
   destructiveColor: DANGER.DEFAULT,
 };
 
@@ -85,9 +85,15 @@ const PostItem = memo(({ post }) => {
         visible={visible2}
         onClose={onClose2}
         onConfirm={async () => {
-          await reportPost(post.id);
-          Alert.alert('해당 게시글을 신고했습니다.');
-          onClose2();
+          try {
+            await reportPost(post.id);
+            console.log(post.id);
+            Alert.alert('해당 게시글을 신고했습니다.');
+            onClose2();
+          } catch (error) {
+            console.log('신고 실패:', error);
+            Alert.alert('신고에 실패했습니다.');
+          }
         }}
       />
       <DangerAlert
@@ -95,8 +101,16 @@ const PostItem = memo(({ post }) => {
         visible={visible3}
         onClose={onClose3}
         onConfirm={async () => {
-          Alert.alert('해당 사용자를 차단 처리했습니다.');
-          onClose3();
+          try {
+            await blockUser(user.uid, post.user.uid);
+            console.log(user.uid, post.user.uid);
+            Alert.alert('해당 사용자를 차단 처리했습니다.');
+            event.emit(EventTypes.REFRESH);
+            onClose3();
+          } catch (error) {
+            console.log('차단 실패:', error);
+            Alert.alert('차단에 실패했습니다.');
+          }
         }}
       />
 

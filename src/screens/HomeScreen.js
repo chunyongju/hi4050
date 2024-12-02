@@ -27,7 +27,7 @@ const HomeScreen = () => {
       <View style={styles.buttonContainer}>
         <Pressable onPress={() => navigation.navigate(ContentRoutes.CHAT)}>
           <Image
-            source={require('../../assets/home-clock.png')}
+            source={require('../../assets/home-chat.png')}
             style={[styles.image, { height }]}
           />
           <Text style={styles.buttonTitle}>대화</Text>
@@ -37,7 +37,7 @@ const HomeScreen = () => {
       <View style={styles.buttonContainer}>
         <Pressable onPress={() => navigation.navigate(ContentRoutes.LIST)}>
           <Image
-            source={require('../../assets/home-map.png')}
+            source={require('../../assets/home-camera.png')}
             style={[styles.image, { height }]}
           />
           <Text style={styles.buttonTitle}>여행사진 공유</Text>
@@ -45,22 +45,24 @@ const HomeScreen = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <Pressable onPress={() => navigation.navigate(MainRoutes.SAJU)}>
+        <Pressable
+          onPress={() => navigation.navigate(MainRoutes.COUNSEL_CRATE)}
+        >
           <Image
             source={require('../../assets/home-clock.png')}
             style={[styles.image, { height }]}
           />
-          <Text style={styles.buttonTitle}>사주풀이/운세</Text>
+          <Text style={styles.buttonTitle}>AI 심리 상담</Text>
         </Pressable>
       </View>
 
       <View style={styles.buttonContainer}>
-        <Pressable onPress={() => navigation.navigate(MainRoutes.TAROT_CARD)}>
+        <Pressable onPress={() => navigation.navigate(MainRoutes.MAP_GPS)}>
           <Image
             source={require('../../assets/home-map.png')}
             style={[styles.image, { height }]}
           />
-          <Text style={styles.buttonTitle}>타로카드</Text>
+          <Text style={styles.buttonTitle}>나의 근처 친구</Text>
         </Pressable>
       </View>
     </View>

@@ -10,8 +10,11 @@ const ImageAssets = [
   require('../../assets/cover.png'),
   require('../../assets/home-clock.png'),
   require('../../assets/home-map.png'),
+  require('../../assets/home-chat.png'),
+  require('../../assets/home-camera.png'),
   require('../../assets/icon.png'),
   require('../../assets/chatgpt.png'),
+  require('../../assets/counselor.png'),
 ];
 
 const Navigation = () => {

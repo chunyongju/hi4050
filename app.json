@@ -2,7 +2,7 @@
   "expo": {
     "name": "HeeVa",
     "slug": "hi4050",
-    "version": "1.0.3",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -12,18 +12,18 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "bundleIdentifier": "com.hi4050.HeeVa",
-      "buildNumber": "1.0.3",
+      "bundleIdentifier": "kr.hi4050.HeeVa",
+      "buildNumber": "1.0.5",
       "supportsTablet": false,
       "infoPlist": {
-        "NSCameraUsageDescription": "이 앱은 카메라에 접근하여 사진을 촬영할 수 있습니다.",
-        "NSPhotoLibraryUsageDescription": "이 앱은 사진 라이브러리에 접근하여 사진을 선택할 수 있습니다.",
-        "NSLocationWhenInUseUsageDescription": "이 앱은 사용 중일 때 위치 정보를 사용합니다."
+        "NSCameraUsageDescription": "사용자가 프로필 사진을 찍어 업로드할 수 있도록 카메라를 사용합니다.",
+        "NSPhotoLibraryUsageDescription": "사용자가 앨범에서 사진을 선택하여 게시물에 첨부할 수 있도록 사진 라이브러리에 접근합니다.",
+        "NSLocationWhenInUseUsageDescription": "사용자 주변의 회원을 추천해드리기 위해 위치 정보를 사용합니다."
       }
     },
     "android": {
-      "package": "com.hi4050.HeeVa",
-      "versionCode": 3,
+      "package": "kr.hi4050.HeeVa",
+      "versionCode": 5,
       "permissions": [
         "READ_EXTERNAL_STORAGE",
         "CAMERA",

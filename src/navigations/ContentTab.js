@@ -63,7 +63,7 @@ const ContentTab = () => {
         component={ProfileScreen}
         options={{
           tabBarIcon: (props) => getTabBarIcon({ ...props, name: 'account' }),
-          tabBarLabel: '프로필',
+          tabBarLabel: '설정',
         }}
       />
     </Tab.Navigator>

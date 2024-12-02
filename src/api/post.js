@@ -12,6 +12,8 @@ import {
   deleteDoc,
   updateDoc,
   increment,
+  arrayUnion,
+  getDoc,
 } from 'firebase/firestore';
 
 export const createPost = async ({ photos, location, text, user }) => {
@@ -49,10 +51,30 @@ export const reportPost = async (postId) => {
   }
 };
 
-const getOption = ({ after, uid }) => {
+// 다른 사용자 차단 기능
+export const blockUser = async (currentUserId, targetUserId) => {
+  try {
+    const userRef = doc(getFirestore(), `users/${currentUserId}`);
+    await updateDoc(userRef, {
+      blockedUsers: arrayUnion(targetUserId), // 차단할 사용자 추가
+    });
+    console.log(`User ${targetUserId} blocked by ${currentUserId}`);
+  } catch (e) {
+    console.log('blockUser error: ', e);
+    throw new Error('사용자 차단 실패');
+  }
+};
+
+const getBlockedUsers = async (userId) => {
+  const userRef = doc(getFirestore(), `users/${userId}`);
+  const userDoc = await getDoc(userRef);
+  return userDoc.exists() ? userDoc.data().blockedUsers || [] : [];
+};
+
+const getOption = ({ after, isMyPost, uid }) => {
   const collectionRef = collection(getFirestore(), 'posts');
 
-  if (uid) {
+  if (isMyPost) {
     return after
       ? query(
           collectionRef,
@@ -79,11 +101,27 @@ const getOption = ({ after, uid }) => {
   }
 };
 
-export const getPosts = async ({ after, uid }) => {
-  const option = getOption({ after, uid });
+export const getPosts = async ({ after, isMyPost, uid }) => {
+  const blockedUsers = await getBlockedUsers(uid); // 차단된 사용자 목록 가져오기
+  // 모든 게시물 가져오기 (차단된 사용자 필터링 없이)
+  const collectionRef = collection(getFirestore(), 'posts');
+  const baseQuery = query(
+    collectionRef,
+    orderBy('createdTs', 'desc'),
+    limit(10 + blockedUsers.length) // 차단된 사용자의 게시물을 제외하고 10개를 얻기 위해 추가로 가져옴
+  );
+  //const option = getOption({ after, isMyPost, uid, blockedUsers });
+  const option = after ? query(baseQuery, startAfter(after)) : baseQuery;
 
   const documentSnapshot = await getDocs(option);
-  const list = documentSnapshot.docs.map((doc) => doc.data());
+  //const list = documentSnapshot.docs.map((doc) => doc.data());
+  const allPosts = documentSnapshot.docs.map((doc) => doc.data());
+
+  // 클라이언트 측에서 차단된 사용자의 게시물 필터링
+  const list = allPosts
+    .filter((post) => !blockedUsers.includes(post.user.uid))
+    .slice(0, 10); // 최대 10개의 게시물만 사용
+
   const last = documentSnapshot.docs[documentSnapshot.docs.length - 1];
 
   return { list, last };
