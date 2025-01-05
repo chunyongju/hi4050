@@ -20,6 +20,7 @@ export const MainRoutes = {
   CHAT_ROOM: 'ChatRoom',
   COUNSEL_CRATE: 'CounselCreate',
   COUNSEL_ROOM: 'CounselRoom',
+  REPORT: 'Report',
   MAP_GPS: 'MapGps',
   SAJU: 'Saju',
   SAJU_LUCK: 'SajuLuck',

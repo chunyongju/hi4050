@@ -23,6 +23,10 @@ import {
 } from 'firebase/firestore';
 import axios from 'axios';
 import { OPENAI_API_KEY } from '../../env';
+import { useActionSheet } from '@expo/react-native-action-sheet';
+import { useNavigation } from '@react-navigation/native';
+import { MainRoutes } from '../navigations/routes';
+//import Clipboard from '@react-native-clipboard/clipboard';
 
 const SendButton = (props) => {
   return (
@@ -98,6 +102,41 @@ const ChatScreen = ({ navigation, route }) => {
   const { top, bottom } = useSafeAreaInsets();
   const name = user.displayName;
   //console.log(user.photoURL);
+  const { showActionSheetWithOptions } = useActionSheet();
+  const navigationto = useNavigation();
+
+  const onPressBubble = (currentMessage) => {
+    const options = ['신고하기', '복사하기', '취소'];
+    const CANCEL_INDEX = 2;
+    const DESTRUCTIVE_INDEX = 0;
+
+    showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex: CANCEL_INDEX,
+        destructiveButtonIndex: DESTRUCTIVE_INDEX,
+        destructiveColor: '#ff0000',
+      },
+      async (selectedIndex) => {
+        switch (selectedIndex) {
+          case 0:
+            if (currentMessage) {
+              navigationto.navigate(MainRoutes.REPORT, { currentMessage });
+              //console.log(currentMessage);
+            }
+            break;
+          case 1:
+            if (currentMessage) {
+              Clipboard.setString(currentMessage);
+            }
+            break;
+          default:
+            break;
+        }
+      }
+    );
+  };
+
   const db = getFirestore();
   useEffect(() => {
     const docRef = doc(db, 'channels', route.params.id);
@@ -242,7 +281,9 @@ const ChatScreen = ({ navigation, route }) => {
           textContentType: 'none', // iOS only
           underlineColorAndroid: 'transparent', // Android only
         }}
-        isTyping
+        //isTyping
+        //onPress={onPressBubble}
+        onLongPress={(context, message) => onPressBubble(message.text)}
         dateFormat={'YYYY년 M월 D일'}
         multiline={true}
         renderUsernameOnMessage={true}

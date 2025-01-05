@@ -17,6 +17,7 @@ import {
   orderBy,
 } from 'firebase/firestore';
 import { MainRoutes } from '../navigations/routes';
+import TextButton from '../components/TextButton';
 
 const CounselCreateScreen = () => {
   const navigation = useNavigation();
@@ -106,13 +107,18 @@ const CounselCreateScreen = () => {
           <Text style={styles.counselor}>
             AI 심리 상담사가 회원님의 다양한 고민들을 들어드립니다.
           </Text>
-
+          {/**
+          <TextButton
+            title={'신고하기'}
+            onPress={() => navigation.navigate(MainRoutes.REPORT)}
+          />
+          **/}
           <Button
             title={buttonTitle}
             onPress={onSubmit}
             disabled={disabled}
             isLoading={isLoading}
-            styles={{ container: { marginTop: 20 } }}
+            styles={{ container: { marginTop: 40 } }}
           />
         </ScrollView>
       </View>

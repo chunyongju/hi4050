@@ -2,7 +2,7 @@
   "expo": {
     "name": "HeeVa",
     "slug": "hi4050",
-    "version": "1.0.5",
+    "version": "1.0.8",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -13,9 +13,14 @@
     },
     "ios": {
       "bundleIdentifier": "kr.hi4050.HeeVa",
-      "buildNumber": "1.0.5",
-      "supportsTablet": false,
+      "buildNumber": "1.0.8",
+      "supportsTablet": true,
       "infoPlist": {
+        "UISupportedInterfaceOrientations": [
+          "UIInterfaceOrientationPortrait",
+          "UIInterfaceOrientationLandscapeLeft",
+          "UIInterfaceOrientationLandscapeRight"
+        ],
         "NSCameraUsageDescription": "사용자가 프로필 사진을 찍어 업로드할 수 있도록 카메라를 사용합니다.",
         "NSPhotoLibraryUsageDescription": "사용자가 앨범에서 사진을 선택하여 게시물에 첨부할 수 있도록 사진 라이브러리에 접근합니다.",
         "NSLocationWhenInUseUsageDescription": "사용자 주변의 회원을 추천해드리기 위해 위치 정보를 사용합니다."
@@ -23,7 +28,7 @@
     },
     "android": {
       "package": "kr.hi4050.HeeVa",
-      "versionCode": 5,
+      "versionCode": 8,
       "permissions": [
         "READ_EXTERNAL_STORAGE",
         "CAMERA",

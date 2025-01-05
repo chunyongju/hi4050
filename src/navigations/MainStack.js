@@ -12,6 +12,7 @@ import ChatCreateScreen from '../screens/ChatCreateScreen';
 import ChatScreen from '../screens/ChatScreen';
 import CounselCreateScreen from '../screens/CounselCreateScreen';
 import CounselScreen from '../screens/counselScreen';
+import ReportScreen from '../screens/ReportScreen';
 import GpsScreen from '../screens/GpsScreen';
 import SajuScreen from '../screens/SajuScreen';
 import SajuLuckScreen from '../screens/SajuLuckScreen';
@@ -56,6 +57,7 @@ const MainStack = () => {
         component={CounselCreateScreen}
       />
       <Stack.Screen name={MainRoutes.COUNSEL_ROOM} component={CounselScreen} />
+      <Stack.Screen name={MainRoutes.REPORT} component={ReportScreen} />
 
       <Stack.Screen name={MainRoutes.MAP_GPS} component={GpsScreen} />
       <Stack.Screen name={MainRoutes.SAJU} component={SajuScreen} />

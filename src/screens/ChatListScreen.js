@@ -13,6 +13,7 @@ import {
   orderBy,
 } from 'firebase/firestore';
 import moment from 'moment';
+import TextButton from '../components/TextButton';
 
 const getDateOrTime = (ts) => {
   const now = moment().startOf('day');
@@ -82,6 +83,10 @@ const ChatListScreen = () => {
   return (
     <View style={[styles.container, { paddingTop: top }]}>
       <View style={styles.settingButton}>
+        {/**<TextButton
+          title={'신고하기'}
+          onPress={() => navigation.navigate(MainRoutes.REPORT)}
+        />**/}
         <Pressable
           onPress={() => navigation.navigate(MainRoutes.CHAT_CRATE)}
           hitSlop={10}
@@ -110,6 +115,8 @@ const styles = StyleSheet.create({
     backgroundColor: WHITE,
   },
   settingButton: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
     paddingHorizontal: 20,
     paddingTop: 15,
     paddingBottom: 15,
